@@ -8,10 +8,13 @@ class SnakeSegment {
 class Snake {
     array<SnakeSegment@> segments = {};
     vec2 direction;
+    vec2 lastMoveDirection;
+    bool nextDirectionSet;
     bool alive;
 
     Snake() {
         direction = vec2(1, 0);
+        nextDirectionSet = false;
         alive = true;
         S_Snake_LastScore = 0;
         
@@ -24,9 +27,10 @@ class Snake {
         if (!alive) return;
 
         vec2 nextPos = segments[0].position + direction;
+        nextDirectionSet = false;
 
         // check for collision
-        if (nextPos.x < 0 || nextPos.x * g_gridSize >= Draw::GetWidth() || nextPos.y < 0 || nextPos.y * g_gridSize >= Draw::GetHeight() || CheckSelfCollision(nextPos)) {
+        if (nextPos.x < 0 || nextPos.x * S_Snake_GridSize >= Draw::GetWidth() || nextPos.y < 0 || nextPos.y * S_Snake_GridSize >= Draw::GetHeight() || CheckSelfCollision(nextPos)) {
             alive = false;
             return;
         }
@@ -47,8 +51,10 @@ class Snake {
 
     void ChangeDirection(vec2 newDir) {
         LogTrace("Change Direction: " + Text::Format("%f", newDir.x) + "," + Text::Format("%f", newDir.y));
-        if (newDir * -1 != direction) // Prevent the snake from reversing
+        if (!nextDirectionSet && newDir * -1 != direction) { // Prevent the snake from reversing
             direction = newDir;
+            nextDirectionSet = true;
+        }
     }
 
     void Grow() {

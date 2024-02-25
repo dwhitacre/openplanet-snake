@@ -27,3 +27,9 @@ vec4 S_Snake_SnakeColor = vec4(0, 255, 0, 1);
 
 [Setting category="Snake" color name="Apple Color"]
 vec4 S_Snake_AppleColor = vec4(255, 0, 0, 1);
+
+[Setting category="Snake" min=1.f max=100.f name="Game Tick Rate (ms)" description="Lower numbers means faster snake"]
+float S_Snake_GameTickRate = 50.f;
+
+[Setting category="Snake" min=10 max=50 name="Grid Size" description="Lower numbers means smaller snake"]
+int S_Snake_GridSize = 20;

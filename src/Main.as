@@ -1,7 +1,5 @@
 GameController gc;
-float g_delta_step = 50.f;
 float g_delta_current = 0.f;
-int g_gridSize = 20;
 
 void Main() {
     while (true) {
@@ -42,7 +40,7 @@ void Update(float dt) {
     if (gc is null) return;
     g_delta_current += dt;
     // LogTrace("DT: " + Text::Format("%f", dt) + " Cur: " + Text::Format("%f", g_delta_current));
-    if (g_delta_current >= g_delta_step) {
+    if (g_delta_current >= S_Snake_GameTickRate) {
         gc.Update();
         g_delta_current = 0.f;
     }

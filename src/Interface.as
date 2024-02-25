@@ -4,7 +4,7 @@ void DrawSnake(Snake@ snake) {
     for (uint i = 0; i < snake.segments.Length; i++) {
         auto segment = snake.segments[i];
         nvg::BeginPath();
-        nvg::Rect(segment.position.x * g_gridSize, segment.position.y * g_gridSize, g_gridSize, g_gridSize);
+        nvg::Rect(segment.position.x * S_Snake_GridSize, segment.position.y * S_Snake_GridSize, S_Snake_GridSize, S_Snake_GridSize);
         nvg::Fill();
     }
 }
@@ -13,6 +13,6 @@ void DrawApple(Apple@ apple) {
     nvg::FillColor(S_Snake_AppleColor);
 
     nvg::BeginPath();
-    nvg::Rect(apple.position.x * g_gridSize, apple.position.y * g_gridSize, g_gridSize, g_gridSize);
+    nvg::Rect(apple.position.x * S_Snake_GridSize, apple.position.y * S_Snake_GridSize, S_Snake_GridSize, S_Snake_GridSize);
     nvg::Fill();
 }

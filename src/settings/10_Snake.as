@@ -34,5 +34,8 @@ float S_Snake_GameTickRate = 50.f;
 [Setting category="Snake" min=10 max=50 name="Grid Size" description="Lower numbers means smaller snake"]
 int S_Snake_GridSize = 20;
 
+[Setting category="Snake" name="Show Border"]
+bool S_Snake_ShowBorder = true;
+
 [Setting category="Snake" color name="Border Color"]
 vec4 S_Snake_BorderColor = vec4(.9f, .5f, 0, .75f);

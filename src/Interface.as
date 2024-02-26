@@ -18,6 +18,7 @@ void DrawApple(Apple@ apple) {
 }
 
 void DrawBorder() {
+    if (!S_Snake_ShowBorder) return;
     nvg::StrokeColor(S_Snake_BorderColor);
     nvg::StrokeWidth(2.f);
     nvg::BeginPath();

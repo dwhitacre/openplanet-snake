@@ -56,6 +56,7 @@ class GameController {
 
         DrawApple(apple);
         DrawSnake(snake);
+        DrawBorder();
     }
 
     void HandleInput(VirtualKey key) {

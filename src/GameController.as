@@ -2,19 +2,21 @@ class GameController {
     bool running;
     Snake@ snake;
     Apple@ apple;
+    Grid@ grid;
 
     GameController() {
         running = false;
-        @snake = @Snake();
         @apple = @Apple();
+        @snake = @Snake();
+        @grid = @Grid();
     }
 
     void StartGame() {
         if (running) return;
         LogTrace("Game started");
         running = true;
-        snake = Snake();
-        apple.Respawn();
+        apple.Respawn(grid);
+        snake.Respawn(grid);
     }
 
     void StopGame() {
@@ -24,6 +26,8 @@ class GameController {
         if (S_Snake_LastScore > S_Snake_HighScore) {
             S_Snake_HighScore = S_Snake_LastScore;
             NotifySuccess("New high score! " + Text::Format("%d", S_Snake_HighScore));
+        } else {
+            NotifyInfo("You died! Score: " + Text::Format("%d", S_Snake_LastScore));
         }
     }
 
@@ -33,16 +37,15 @@ class GameController {
         LogTrace("Snake position: " + Text::Format("%f", snake.segments[0].position.x) + "," + Text::Format("%f", snake.segments[0].position.y));
         LogTrace("Apple position: " + Text::Format("%f", apple.position.x) + "," + Text::Format("%f", apple.position.y));
         
-        snake.Move();
+        snake.Move(grid);
 
         if (snake.segments[0].position == apple.position) {
             snake.Grow();
-            apple.Respawn();
+            apple.Respawn(grid);
             LogTrace("Got apple! Score: " + Text::Format("%d", S_Snake_LastScore));
         }
 
         if (!snake.alive) {
-            NotifyInfo("You died! Score: " + Text::Format("%d", S_Snake_LastScore));
             StopGame();
         }
     }
@@ -54,9 +57,9 @@ class GameController {
 
         if (!running) return;
 
-        DrawApple(apple);
-        DrawSnake(snake);
-        DrawBorder();
+        apple.Render(grid);
+        snake.Render(grid);
+        grid.Render();
     }
 
     void HandleInput(VirtualKey key) {

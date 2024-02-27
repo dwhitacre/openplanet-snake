@@ -1,11 +1,19 @@
 class Apple {
     vec2 position;
 
-    Apple() {
-        this.Respawn();
+    Apple() {}
+
+    void Respawn(Grid@ grid) {
+        position = grid.GetRandomCell();
     }
 
-    void Respawn() {
-        position = vec2(Math::Rand(0, (Draw::GetWidth() - 1) / S_Snake_GridSize), Math::Rand(0, (Draw::GetHeight() - 1)) / S_Snake_GridSize);
+    void Render(Grid@ grid) {
+        nvg::FillColor(S_Snake_AppleColor);
+
+        vec2 coords = grid.GetCellCoords(position);
+
+        nvg::BeginPath();
+        nvg::Rect(coords.x, coords.y, grid.GetCellWidth(), grid.GetCellHeight());
+        nvg::Fill();
     }
 }

@@ -1,31 +1,16 @@
 class Grid {
     Grid() {}
 
-    string ToString() {
-        return "Width: " + Text::Format("%d", GetWidth()) + ", " +
-            "Height: " + Text::Format("%d", GetHeight()) + ", " +
-            "CellWidth: " + Text::Format("%d", GetCellWidth()) + ", " +
-            "CellHeight: " + Text::Format("%d", GetCellHeight());
-    }
-
     vec2 GetCoords() {
         return vec2(S_Snake_GridOffsetLeft, S_Snake_GridOffsetTop);
     }
 
-    int GetMaxWidth() {
+    float GetWidth() {
         return Draw::GetWidth() - S_Snake_GridOffsetRight - GetCoords().x;
     }
 
-    int GetMaxHeight() {
+    float GetHeight() {
         return Draw::GetHeight() - S_Snake_GridOffsetBottom - GetCoords().y;
-    }
-
-    int GetWidth() {
-        return GetNumCellsX() * GetCellWidth();
-    }
-
-    int GetHeight() {
-        return GetNumCellsY() * GetCellHeight();
     }
 
     int GetStrokeWidth() {
@@ -55,15 +40,15 @@ class Grid {
         );
     }
 
-    int GetCellWidth() {
-        return GetMaxWidth() / GetNumCellsX();
+    float GetCellWidth() {
+        return GetWidth() / GetNumCellsX();
     }
 
-    int GetCellHeight() {
-        return GetMaxHeight() / GetNumCellsY();
+    float GetCellHeight() {
+        return GetHeight() / GetNumCellsY();
     }
 
-    void RenderRect(vec2 coords, int width, int height) {
+    void RenderRect(vec2 coords, float width, float height) {
         nvg::StrokeColor(S_Snake_GridColor);
         nvg::StrokeWidth(GetStrokeWidth());
         nvg::BeginPath();
@@ -97,7 +82,6 @@ class Grid {
     }
 
     void Render() {
-        LogTrace("Grid: " + this.ToString());
         RenderBorder();
         RenderCells();
     }

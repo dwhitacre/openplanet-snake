@@ -31,11 +31,35 @@ vec4 S_Snake_AppleColor = vec4(1, 0, 0, 1);
 [Setting category="Snake" min=1.f max=100.f name="Game Tick Rate (ms)" description="Lower numbers means faster snake"]
 float S_Snake_GameTickRate = 50.f;
 
-[Setting category="Snake" min=10 max=50 name="Grid Size" description="Lower numbers means smaller snake"]
+[Setting category="Snake" min=10 max=50 name="Grid Size" description="Lower numbers means smaller snake" hidden]
 int S_Snake_GridSize = 20;
 
-[Setting category="Snake" name="Show Border"]
-bool S_Snake_ShowBorder = true;
+[Setting category="Snake" name="Show Grid Border"]
+bool S_Snake_ShowGridBorder = true;
 
-[Setting category="Snake" color name="Border Color"]
-vec4 S_Snake_BorderColor = vec4(.9f, .5f, 0, .75f);
+[Setting category="Snake" name="Show Grid Cells" description="Laggy. Only enable when adjusting the grid settings."]
+bool S_Snake_ShowGridCells = false;
+
+[Setting category="Snake" color name="Grid Color"]
+vec4 S_Snake_GridColor = vec4(0, 0, 0, .5f);
+
+[Setting category="Snake" min=16 max=320 name="Grid Width"]
+int S_Snake_GridSizeX = 16 * 6;
+
+[Setting category="Snake" min=9 max=180 name="Grid Height"]
+int S_Snake_GridSizeY = 9 * 6;
+
+[Setting category="Snake" min=0 name="Grid Offset Left"]
+int S_Snake_GridOffsetLeft = 0;
+
+[Setting category="Snake" min=1 name="Grid Offset Right"]
+int S_Snake_GridOffsetRight = 1;
+
+[Setting category="Snake" min=0 name="Grid Offset Top"]
+int S_Snake_GridOffsetTop = 0;
+
+[Setting category="Snake" min=1 name="Grid Offset Bottom"]
+int S_Snake_GridOffsetBottom = 1;
+
+[Setting category="Snake" min=1 name="Grid Stroke Width"]
+int S_Snake_GridStrokeWidth = 2;

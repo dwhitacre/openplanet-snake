@@ -6,30 +6,33 @@ class SnakeSegment {
 }
 
 class Snake {
-    array<SnakeSegment@> segments = {};
+    array<SnakeSegment@> segments;
     vec2 direction;
     vec2 lastMoveDirection;
     bool alive;
 
-    Snake() {
+    Snake() {}
+
+    void Respawn(Grid@ grid) {
+        segments = {};
         direction = vec2(1, 0);
         lastMoveDirection = direction;
         alive = true;
         S_Snake_LastScore = 0;
         
         for (uint i = 0; i < 4; i++) {
-            segments.InsertLast(SnakeSegment(vec2(10 - i, 5)));
+            segments.InsertLast(SnakeSegment(grid.GetStartCell() - vec2(i, 0)));
         }
     }
 
-    void Move() {
+    void Move(Grid@ grid) {
         if (!alive) return;
 
         vec2 nextPos = segments[0].position + direction;
         lastMoveDirection = direction;
 
         // check for collision
-        if (nextPos.x < 0 || nextPos.x * S_Snake_GridSize >= Draw::GetWidth() || nextPos.y < 0 || nextPos.y * S_Snake_GridSize >= Draw::GetHeight() || CheckSelfCollision(nextPos)) {
+        if (nextPos.x < 0 || nextPos.x >= grid.GetNumCellsX() || nextPos.y < 0 || nextPos.y >= grid.GetNumCellsY() || CheckSelfCollision(nextPos)) {
             alive = false;
             return;
         }
@@ -58,5 +61,19 @@ class Snake {
     void Grow() {
         segments.InsertLast(SnakeSegment(segments[segments.Length - 1].position));
         S_Snake_LastScore += S_Snake_ScorePerApple;
+    }
+
+    void Render(Grid@ grid) {
+        nvg::FillColor(S_Snake_SnakeColor);
+
+        for (uint i = 0; i < segments.Length; i++) {
+            auto segment = segments[i];
+
+            vec2 coords = grid.GetCellCoords(segment.position);
+
+            nvg::BeginPath();
+            nvg::Rect(coords.x, coords.y, grid.GetCellWidth(), grid.GetCellHeight());
+            nvg::Fill();
+        }
     }
 }

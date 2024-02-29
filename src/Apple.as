@@ -8,6 +8,7 @@ class Apple {
     }
 
     void Render(Grid@ grid) {
+        if (S_Snake_AppleColorRainbow) S_Snake_AppleColor = Rainbow(S_Snake_AppleColor);
         nvg::FillColor(S_Snake_AppleColor);
 
         vec2 coords = grid.GetCellCoords(position);

@@ -64,6 +64,7 @@ class Snake {
     }
 
     void Render(Grid@ grid) {
+        if (S_Snake_SnakeColorRainbow) S_Snake_SnakeColor = Rainbow(S_Snake_SnakeColor);
         nvg::FillColor(S_Snake_SnakeColor);
 
         for (uint i = 0; i < segments.Length; i++) {

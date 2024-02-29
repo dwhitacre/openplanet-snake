@@ -25,8 +25,14 @@ VirtualKey S_Snake_DownKey = VirtualKey::Down;
 [Setting category="Snake" color name="Snake Color"]
 vec4 S_Snake_SnakeColor = vec4(0, 1, 0, 1);
 
+[Setting category="Snake" name="Snake Color Rainbow"]
+bool S_Snake_SnakeColorRainbow = false;
+
 [Setting category="Snake" color name="Apple Color"]
 vec4 S_Snake_AppleColor = vec4(1, 0, 0, 1);
+
+[Setting category="Snake" name="Apply Color Rainbow"]
+bool S_Snake_AppleColorRainbow = false;
 
 [Setting category="Snake" min=1.f max=100.f name="Game Tick Rate (ms)" description="Lower numbers means faster snake"]
 float S_Snake_GameTickRate = 50.f;

@@ -1,0 +1,14 @@
+# Security Policy
+
+## Supported Versions
+
+Only latest version is currently supported with security updates.
+
+## Reporting a Vulnerability
+
+Send an email to security@whitacre.dev with the following information:
+
+- Affected Repo (dwhitacre/openplanet-snake)
+- Vulnerability (SQL Injection/XSS/etc)
+- Severity (perceived scale 1-10, 10 being most severe)
+- Description/Reproduction Steps

@@ -6,16 +6,16 @@ source "$SCRIPT_DIR/watch_fs.sh"
 
 log "lgrey" "Loaded scripts from the directory $SCRIPT_DIR"
 
-GIT_DIR=$(git rev-parse --show-toplevel)
-SRC_DIR="$GIT_DIR/src"
-INFO_TOML="$GIT_DIR/info.toml"
+ROOT_DIR="$(git rev-parse --show-toplevel)/plugin"
+SRC_DIR="$ROOT_DIR/src"
+INFO_TOML="$ROOT_DIR/info.toml"
 PLUGINS_DIR=${PLUGINS_DIR:-$HOME/OpenplanetNext/Plugins}
 ZIP=${ZIP:-"$PROGRAMFILES/7-Zip/7z.exe"}
 
 PLUGIN_PRETTY_NAME="$(cat $INFO_TOML | dos2unix | grep '^name' | cut -f 2 -d '=' | tr -d '\"\r' | sed 's/^[ ]*//')"
 PLUGIN_VERSION="$(cat $INFO_TOML | dos2unix | grep '^version' | cut -f 2 -d '=' | tr -d '\"\r' | sed 's/^[ ]*//')"
 PLUGIN_NAME=$(echo "$PLUGIN_PRETTY_NAME" | tr -d '(),:;'\''"' | tr 'A-Z ' 'a-z-')
-PLUGIN_BUILD_DIR="$GIT_DIR/dist"
+PLUGIN_BUILD_DIR="$ROOT_DIR/dist"
 PLUGIN_BUILD_NAME="$PLUGIN_BUILD_DIR/$PLUGIN_NAME-$PLUGIN_VERSION.op"
 PLUGIN_DIRTY_FLAG="$PLUGIN_BUILD_DIR/dirty"
 

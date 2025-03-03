@@ -1,0 +1,19 @@
+version: "0.5"
+
+processes:
+  api:
+    working_dir: api
+    command: bun run watch
+    environment:
+      - "DATABASE_CONNSTR=postgres://openplanetsnake:Passw0rd!@localhost:5432/openplanetsnake?pool_max_conns=10"
+      - "ADMIN_KEY=developer-test-key"
+      - "HOST=localhost"
+      - "DEBUG=true"
+  db:
+    working_dir: .
+    command: docker compose up db
+    shutdown:
+      command: docker compose stop db
+  plugin:
+    working_dir: plugin
+    command: bash .bin/build.sh -w

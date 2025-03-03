@@ -1,0 +1,69 @@
+replicaCount: 2
+maxUnavailable: 1
+
+app:
+  image:
+    repository: danonthemoon/openplanet-snake-app
+    pullPolicy: Always
+    tag: latest
+  resources:
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  service:
+    port: 80
+  securityContext: {}
+
+api:
+  image:
+    repository: danonthemoon/openplanet-snake-api
+    pullPolicy: Always
+    tag: latest
+  resources:
+    limits:
+      cpu: 250m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  service:
+    port: 8081
+  securityContext: {}
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podSecurityContext: {}
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+  hosts:
+    - host: openplanet-snake.danonthemoon.dev
+    - host: www.openplanet-snake.danonthemoon.dev
+  tls:
+    - hosts:
+        - openplanet-snake.danonthemoon.dev
+        - www.openplanet-snake.danonthemoon.dev
+      secretName: openplanet-snake-tls
+  directs: []
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

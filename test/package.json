@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "module": "index.ts",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/pg": "^8.11.11"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.4.0",
+    "pg": "^8.13.1"
+  }
+}

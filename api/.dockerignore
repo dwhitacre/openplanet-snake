@@ -1,7 +1,7 @@
 *
 .*
 
-!bun.lockb
+!bun.lock
 !package.json
 !tsconfig.json
 !index.ts

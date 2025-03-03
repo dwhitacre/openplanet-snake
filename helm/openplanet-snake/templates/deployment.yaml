@@ -40,11 +40,6 @@ spec:
                   key: DATABASE_CONNSTR
             - name: DATABASE_SSL
               value: "true"
-            - name: ADMIN_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: openplanet-snake-api
-                  key: ADMIN_KEY
             - name: HOST
               value: "0.0.0.0"
           ports:

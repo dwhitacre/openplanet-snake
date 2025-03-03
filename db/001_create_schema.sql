@@ -20,8 +20,7 @@ create table GameModeScores(
   Score int not null,
   DateModified timestamp not null default (now() at time zone 'utc'),
   foreign key(AccountId) references Players(AccountId),
-  foreign key(GameModeId) references GameModes(Id),
-  unique(AccountId, GameModeId)
+  foreign key(GameModeId) references GameModes(Id)
 );
 
 create table Leaderboards(

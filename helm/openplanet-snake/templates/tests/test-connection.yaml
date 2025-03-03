@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "openplanet-snake.fullname" . }}-test-connection"
+  labels:
+    {{- include "openplanet-snake.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget-api
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "openplanet-snake.fullname" . }}:{{ .Values.api.service.port }}']
+  restartPolicy: Never

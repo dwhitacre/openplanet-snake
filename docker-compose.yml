@@ -1,0 +1,44 @@
+name: openplanet-snake
+
+services:
+  api:
+    build:
+      context: api
+    image: danonthemoon/openplanet-snake-api:latest
+    restart: unless-stopped
+    environment:
+      DATABASE_CONNSTR: postgres://openplanetsnake:Passw0rd!@db:5432/openplanetsnake?pool_max_conns=10
+      ADMIN_KEY: developer-test-key
+      HOST: 0.0.0.0
+    ports:
+      - 8081:8081
+    networks:
+      - server-network
+    depends_on:
+      - db
+  ingress:
+    image: nginx
+    restart: unless-stopped
+    ports:
+      - 8082:80
+    volumes:
+      - ./ingresssim/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - server-network
+    depends_on:
+      - api
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: Passw0rd!
+      POSTGRES_USER: openplanetsnake
+    networks:
+      - server-network
+    ports:
+      - 5432:5432
+
+networks:
+  server-network:
+    driver: bridge

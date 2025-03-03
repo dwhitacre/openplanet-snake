@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: { { include "openplanet-snake.fullname" . } }
-  labels: { { - include "openplanet-snake.labels" . | nindent 4 } }
+  name: {{ include "openplanet-snake.fullname" . }}
+  labels: {{ include "openplanet-snake.labels" . | nindent 4 }}
 spec:
-  type: { { .Values.service.type } }
+  type: {{ .Values.service.type }}
   ports:
-    - port: { { .Values.api.service.port } }
+    - port: {{ .Values.api.service.port }}
       targetPort: api-http
       protocol: TCP
       name: api-http
-  selector: { { - include "openplanet-snake.selectorLabels" . | nindent 4 } }
+  selector: {{ include "openplanet-snake.selectorLabels" . | nindent 4 }}
